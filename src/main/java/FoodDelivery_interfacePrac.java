@@ -1,4 +1,5 @@
 interface DeliveryPartner {
+    //method
     void deliver(String item, String address);
 }
 

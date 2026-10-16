@@ -1,12 +1,17 @@
 abstract class Employee{
+
+    //field
     protected String name;
 
+    //constructor
     public Employee(String name) {
         this.name = name;
     }
 
+    //abstract method
     abstract double calculatePay();
 
+    //Concrete method
     void printPayslip() {
         System.out.println(name + " Your Salary is: "+calculatePay());
     }
@@ -18,10 +23,12 @@ class FulltimeEmployee extends Employee {
     private double monthlySalary;
 
     public FulltimeEmployee(String name, int monthlySalary) {
-        super(name);
+        // super(level) = calling parent's constructor
+        super(name); //parent class field
         this.monthlySalary = monthlySalary;
     }
 
+    //parent class method
     @Override
     double calculatePay() {
         return monthlySalary;
