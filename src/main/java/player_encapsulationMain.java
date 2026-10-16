@@ -1,4 +1,4 @@
-public class player1 {
+public class player_encapsulationMain {
 
     public static void main(String[] args) {
         Player_EncapsulationPrac P = new Player_EncapsulationPrac("Hardi");
