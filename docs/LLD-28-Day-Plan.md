@@ -19,7 +19,7 @@ _OOP foundations. Get comfortable writing classes yourself._
 
 ### Day 2 · Fri 16 Oct
 
-- [ ] **Must**: Abstraction + small practice ([page](https://algomaster.io/learn/lld/abstraction))
+- [x] **Must**: Abstraction + small practice ([page](https://algomaster.io/learn/lld/abstraction))
 
 ### Day 3 · Sat 17 Oct
 
