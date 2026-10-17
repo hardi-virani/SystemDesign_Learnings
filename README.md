@@ -1,4 +1,8 @@
-# LLD in 28 days
+# System Design Learnings: LLD in 28 days
+
+Java practice code lives in `src/main/java`.
+
+**Progress: 4 of 60 scheduled tasks done.**
 
 Thursday 15 October to Wednesday 11 November 2026, about 2 to 3 hours a day, following the [algomaster.io LLD course](https://algomaster.io/learn/lld).
 
