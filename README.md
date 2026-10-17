@@ -10,7 +10,7 @@
 
 **15 Oct → 11 Nov 2026** · 2–3 hours a day · following [AlgoMaster LLD](https://algomaster.io/learn/lld)
 
-`█░░░░░░░░░░░░░░░░░░░` **7%**
+**Overall: 7% done**
 
 </div>
 
@@ -20,10 +20,10 @@
 
 | Week | Focus | Progress | Done |
 |:--|:--|:--|:-:|
-| **Week 1** | OOP foundations | `███░░░░░░░` | 4/14 |
-| **Week 2** | Principles, SOLID & UML | `░░░░░░░░░░` | 0/17 |
-| **Week 3** | Design patterns | `░░░░░░░░░░` | 0/17 |
-| **Week 4** | Interview problems | `░░░░░░░░░░` | 0/12 |
+| **Week 1** | OOP foundations | ![29%](https://img.shields.io/badge/29%25-in_progress-D9951A?style=flat-square) | 4/14 |
+| **Week 2** | Principles, SOLID & UML | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
+| **Week 3** | Design patterns | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
+| **Week 4** | Interview problems | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/12 |
 
 > [!TIP]
 > For every page: **read it, then write a small program yourself** before ticking it off. If you fall behind, use the buffer and review days, and never skip the coding part.
