@@ -23,7 +23,7 @@ _OOP foundations. Get comfortable writing classes yourself._
 
 ### Day 3 · Sat 17 Oct
 
-- [ ] **Must**: Inheritance + small practice ([page](https://algomaster.io/learn/lld/inheritance))
+- [x] **Must**: Inheritance + small practice ([page](https://algomaster.io/learn/lld/inheritance))
 
 ### Day 4 · Sun 18 Oct
 
