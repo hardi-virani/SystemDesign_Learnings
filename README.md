@@ -6,11 +6,11 @@
 
 ![Java](https://img.shields.io/badge/Java-23-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
-![Progress](https://img.shields.io/badge/Progress-4%2F60_tasks-2E8B57?style=for-the-badge)
+![Progress](https://img.shields.io/badge/Progress-6%2F60_tasks-2E8B57?style=for-the-badge)
 
 **15 Oct → 11 Nov 2026** · 2–3 hours a day · following [AlgoMaster LLD](https://algomaster.io/learn/lld)
 
-**Overall: 7% done**
+**Overall: 10% done**
 
 </div>
 
@@ -20,7 +20,7 @@
 
 | Week | Focus | Progress | Done |
 |:--|:--|:--|:-:|
-| **Week 1** | OOP foundations | ![29%](https://img.shields.io/badge/29%25-in_progress-D9951A?style=flat-square) | 4/14 |
+| **Week 1** | OOP foundations | ![43%](https://img.shields.io/badge/43%25-in_progress-D9951A?style=flat-square) | 6/14 |
 | **Week 2** | Principles, SOLID & UML | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
 | **Week 3** | Design patterns | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
 | **Week 4** | Interview problems | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/12 |
@@ -42,8 +42,8 @@
 |  |  | Encapsulation + small practice | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/encapsulation) | [`Player_EncapsulationPrac.java`](src/main/java/Player_EncapsulationPrac.java)<br>[`player_encapsulationMain.java`](src/main/java/player_encapsulationMain.java) |
 | **2** | Fri 16 Oct | Abstraction + small practice | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/abstraction) | [`payroll_abstractPrac.java`](src/main/java/payroll_abstractPrac.java)<br>[`abstractPrac_main.java`](src/main/java/abstractPrac_main.java) |
 | **3** | Sat 17 Oct | Inheritance + small practice | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/inheritance) | [`BankAccount_InheritancePrac.java`](src/main/java/BankAccount_InheritancePrac.java) |
-| **4** | Sun 18 Oct | Polymorphism + small practice | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/polymorphism) | — |
-| **5** | Mon 19 Oct | Quiz: OOP fundamentals | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/oop-fundamentals-quiz) | — |
+| **4** | Sun 18 Oct | Polymorphism + small practice | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/polymorphism) | [`Shape_PloymorphismPrac.java`](src/main/java/Shape_PloymorphismPrac.java) |
+| **5** | Mon 19 Oct | Quiz: OOP fundamentals | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/oop-fundamentals-quiz) | — |
 |  |  | Exercise: OOP fundamentals | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/oop-fundamentals-exercises) | — |
 | **6** | Tue 20 Oct | Association | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/association) | — |
 |  |  | Aggregation | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/aggregation) | — |
