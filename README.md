@@ -6,12 +6,12 @@
 
 ![Java](https://img.shields.io/badge/Java-23-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
-![Plan 2](https://img.shields.io/badge/Plan_2-1%2F59_tasks-2E8B57?style=for-the-badge)
+![Plan 2](https://img.shields.io/badge/Plan_2-2%2F59_tasks-2E8B57?style=for-the-badge)
 ![Earlier](https://img.shields.io/badge/Done_in_October-6_topics-1D47B8?style=for-the-badge)
 
 **4 Nov → 30 Nov 2026** · 27 days · 2–3 hours a day · following [AlgoMaster LLD](https://algomaster.io/learn/lld)
 
-**Plan 2: 2% done** · 6 topics finished earlier
+**Plan 2: 3% done** · 6 topics finished earlier
 
 </div>
 
@@ -22,7 +22,7 @@
 | Section | Focus | Progress | Done |
 |:--|:--|:--|:-:|
 | **Already done** | OOP foundations (October) | ![100%](https://img.shields.io/badge/100%25-done-2E8B57?style=flat-square) | 6/6 |
-| **Catch-up day** | Class relationships | ![17%](https://img.shields.io/badge/17%25-in_progress-D9951A?style=flat-square) | 1/6 |
+| **Catch-up day** | Class relationships | ![33%](https://img.shields.io/badge/33%25-in_progress-D9951A?style=flat-square) | 2/6 |
 | **Week 1** | Principles, SOLID & UML | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
 | **Week 2** | Design patterns | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
 | **Week 3** | Interview problems | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/10 |
@@ -57,7 +57,7 @@
 | Day | Date | Topic | Tier | Status | Lesson | My code |
 |:-:|:--|:--|:--|:-:|:-:|:--|
 | **1** | Wed 4 Nov | Association | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/association) |[`College_System_Accociation_Prac.java`](src/main/java/Class_Relationships/College_System_Accociation_Prac.java) |
-|  |  | Aggregation | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/aggregation) | — |
+|  |  | Aggregation | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/aggregation) | [`Team_Player_AgreegationPrac.java`](src/main/java/Class_Relationships/Team_Player_AgreegationPrac.java) |
 |  |  | Composition | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/composition) | — |
 |  |  | Dependency | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/dependency) | — |
 |  |  | Realization | 🟡 Should | ⬜ | [📖 Read](https://algomaster.io/learn/lld/realization) | — |
