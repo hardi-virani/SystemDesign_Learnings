@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LLD plan 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style id="css">
+:root{--paper:#EEF3F8;--grid:rgba(30,64,120,.07);--ink:#14284B;--muted:#56688A;--line:#C6D3E5;--surface:#F8FAFD;--must:#1D47B8;--mustText:#FFFFFF;--should:#1C7562;--good:#7450AC;--today:#D9951A;--done:#2E8B57;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0C1A2E;--grid:rgba(160,190,235,.06);--ink:#DCE6F5;--muted:#8FA3C2;--line:#263C5C;--surface:#122440;--must:#8EB0FF;--mustText:#0C1A2E;--should:#6CC9B0;--good:#C2A6F0;--today:#F2B544;--done:#5CC48A;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#0C1A2E;--grid:rgba(160,190,235,.06);--ink:#DCE6F5;--muted:#8FA3C2;--line:#263C5C;--surface:#122440;--must:#8EB0FF;--mustText:#0C1A2E;--should:#6CC9B0;--good:#C2A6F0;--today:#F2B544;--done:#5CC48A;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);font:16px/1.55 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:780px;margin:0 auto;padding:40px 20px 72px}
+h1,h2,h3{font-family:"Bricolage Grotesque","Atkinson Hyperlegible",system-ui,sans-serif;letter-spacing:-.015em}
+h1{font-size:clamp(2.2rem,7vw,3.4rem);font-weight:800;line-height:1;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.strip{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;margin:0 0 10px}
+@media (min-width:720px){.strip{grid-template-columns:repeat(27,1fr)}}
+.sq{aspect-ratio:1;border:1.5px solid var(--line);border-radius:4px;display:grid;place-items:center;font-size:.7rem;color:var(--muted);background:linear-gradient(to top,var(--line) var(--p,0%),var(--surface) var(--p,0%));text-decoration:none}
+.sq.done{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.sq.today{outline:2.5px solid var(--today);outline-offset:1px;color:var(--ink);font-weight:700}
+.sq.done.today{color:var(--paper)}
+.sq:focus-visible{outline:3px solid var(--must);outline-offset:2px}
+.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;color:var(--muted);font-size:.92rem;margin:0 0 26px}
+.meta strong{color:var(--ink)}
+.note{border-left:3px solid var(--today);padding:4px 0 4px 14px;margin:0 0 22px;max-width:62ch}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:.9rem;color:var(--muted);margin:0 0 34px}
+.tier{display:inline-block;font-size:.72rem;font-weight:700;line-height:1;padding:4px 7px;border-radius:999px;white-space:nowrap;vertical-align:1px}
+.t-m{background:var(--must);color:var(--mustText);border:1.5px solid var(--must)}
+.t-s{color:var(--should);border:1.5px solid var(--should)}
+.t-g{color:var(--good);border:1.5px dashed var(--good)}
+.week{margin:0 0 40px}
+.week h2{font-size:1.5rem;font-weight:800;margin:0 0 2px}
+.week .theme{color:var(--muted);margin:0 0 12px}
+.day{display:grid;grid-template-columns:1fr;gap:6px;padding:14px 0 14px 14px;border-top:1px solid var(--line);border-left:3px solid transparent}
+@media (min-width:600px){.day{grid-template-columns:118px 1fr;gap:16px}}
+.day.is-today{border-left-color:var(--today);background:color-mix(in srgb,var(--today) 8%,transparent)}
+.when{font-size:.9rem;color:var(--muted)}
+.when b{display:block;color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.05rem}
+.items{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.item{display:flex;align-items:flex-start;gap:10px}
+.item input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--done);flex:none;cursor:pointer}
+.item input:focus-visible{outline:2px solid var(--must);outline-offset:2px}
+.item label{cursor:pointer;flex:1}
+.item .tier{margin-right:6px}
+.item a{font-size:.85rem;color:var(--muted);margin-left:6px;white-space:nowrap}
+.item a:hover{color:var(--ink)}
+.item.checked .txt{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+details{border-top:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:1.25rem}
+summary span{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-weight:400;font-size:.92rem;color:var(--muted);margin-left:8px}
+details .items{margin-top:14px}
+details p{color:var(--muted);margin:10px 0 0;max-width:62ch}
+.status{margin-top:28px;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.sq{transition:background-color .2s}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script id="state" type="application/json">{"done":["abstraction-p1","encapsulation-p1","inheritance-p1","oop-quiz-p1","p-interfaces-p1","polymorphism-p1"]}</script>
+<script id="app-js">
+(function(){
+const HEAD='<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<title>LLD plan 2</title>\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">\n';
+const SRC=document.getElementById('app-js').textContent;
+const CSS=document.getElementById('css').textContent;
+const B='https://algomaster.io/learn/lld/';
+const TIER={m:'Must',s:'Should',g:'Good'};
+
+// Finished during plan 1 (15 to 19 October). Shown ticked, not counted in plan 2 totals.
+const EARLIER=[
+ ['2026-10-15',[['m','Interfaces practice: FoodApp delivery','interfaces','p-interfaces-p1'],['m','Encapsulation + small practice','encapsulation','encapsulation-p1']]],
+ ['2026-10-16',[['m','Abstraction + small practice','abstraction','abstraction-p1']]],
+ ['2026-10-17',[['m','Inheritance + small practice','inheritance','inheritance-p1']]],
+ ['2026-10-18',[['m','Polymorphism + small practice','polymorphism','polymorphism-p1']]],
+ ['2026-10-19',[['m','Quiz: OOP fundamentals','oop-fundamentals-quiz','oop-quiz-p1']]]
+];
+
+// [tier, label, page slug or '', unique id]
+const PLAN=[
+ {title:'Catch-up day',theme:'Finish class relationships today. Anything left tonight moves to the Nov 11 buffer day.',days:[
+  ['2026-11-04',[['m','Rewrite the college system from memory (sketch it on paper first)','','p-assoc'],['m','Aggregation','aggregation','aggregation'],['m','Composition','composition','composition'],['m','Dependency','dependency','dependency'],['s','Realization','realization','realization'],['m','Quiz + exercise: class relationships','class-relationships-exercises','rel-ex']]]
+ ]},
+ {title:'Week 1',theme:'Design principles, SOLID and class diagrams.',days:[
+  ['2026-11-05',[['s','DRY, KISS, YAGNI','dry','dry-kiss-yagni'],['m','Coupling and cohesion','coupling-and-cohesion','coupling']]],
+  ['2026-11-06',[['s','Separation of concerns','soc','soc'],['s','Composing objects principle','composing-objects','composing'],['s','Quiz: design principles','design-principles-quiz','dp-quiz']]],
+  ['2026-11-07',[['m','Single responsibility (SRP)','srp','srp'],['m','Open/closed (OCP)','ocp','ocp']]],
+  ['2026-11-08',[['m','Liskov substitution (LSP)','lsp','lsp'],['m','Interface segregation (ISP)','isp','isp'],['m','Dependency inversion (DIP)','dip','dip']]],
+  ['2026-11-09',[['m','Quiz + exercise: SOLID','solid-principles-exercises','solid-ex'],['m','Class diagram','class-diagram','class-diagram']]],
+  ['2026-11-10',[['m','Intro to design patterns','design-patterns','dp-intro'],['s','Sequence diagram','sequence-diagram','seq-diagram'],['s','State machine diagram','state-machine-diagram','sm-diagram']]],
+  ['2026-11-11',[['m','Buffer day: catch up on anything unfinished','','buf-1'],['m','Review: redo one SOLID exercise from memory','','rev-1']]]
+ ]},
+ {title:'Week 2',theme:'The design patterns interviews actually use.',days:[
+  ['2026-11-12',[['m','Singleton','singleton','singleton'],['m','Factory method','factory-method','factory']]],
+  ['2026-11-13',[['m','Builder','builder','builder'],['s','Abstract factory','abstract-factory','abstract-factory'],['s','Dependency injection pattern','dependency-injection','di']]],
+  ['2026-11-14',[['m','Adapter','adapter','adapter'],['m','Facade','facade','facade']]],
+  ['2026-11-15',[['m','Decorator','decorator','decorator'],['s','Composite','composite','composite'],['s','Proxy','proxy','proxy']]],
+  ['2026-11-16',[['m','Strategy','strategy','strategy'],['m','Observer','observer','observer']]],
+  ['2026-11-17',[['m','State','state','state'],['s','Command','command','command']]],
+  ['2026-11-18',[['s','Template method','template-method','template'],['s','Chain of responsibility','chain-of-responsibility','cor'],['m','Review: write Strategy and Observer again without notes','','rev-2']]]
+ ]},
+ {title:'Week 3',theme:'Interview problems. Sketch the class diagram first, then try each alone for 45 minutes before reading the solution.',days:[
+  ['2026-11-19',[['m','How to approach OOD interviews','ood-approach','ood-approach'],['m','How to identify entities','identifying-entities','entities'],['m','Design Tic Tac Toe','design-tic-tac-toe','tictactoe']]],
+  ['2026-11-20',[['m','Design Parking Lot','design-parking-lot','parking']]],
+  ['2026-11-21',[['m','Buffer day: catch up on anything unfinished','','buf-2'],['m','Review: rewrite the State pattern from memory','','rev-3']]],
+  ['2026-11-22',[['m','Design Vending Machine','design-vending-machine','vending']]],
+  ['2026-11-23',[['m','Design Elevator System','design-elevator-system','elevator']]],
+  ['2026-11-24',[['m','Design LRU Cache','design-lru-cache','lru']]],
+  ['2026-11-25',[['m','Design Library Management System','design-library-management-system','library']]]
+ ]},
+ {title:'Final stretch',theme:'A few more problems, then mock interviews.',days:[
+  ['2026-11-26',[['s','Design Snake and Ladder','design-snake-and-ladder','snake'],['s','Design Notification System','design-notification-system','notification']]],
+  ['2026-11-27',[['s','Design Splitwise','design-splitwise','splitwise'],['s','Design Movie Booking System','design-movie-booking-system','movie']]],
+  ['2026-11-28',[['m','Buffer day: catch up on anything unfinished','','buf-3'],['m','Review your mistakes log','','rev-4']]],
+  ['2026-11-29',[['m','Mock: Parking Lot from scratch in 45 minutes, no notes','','mock-1']]],
+  ['2026-11-30',[['m','Mock: Design ATM as an unseen problem, 45 minutes','design-atm','mock-2'],['m','Review your weakest two topics','','rev-5']]]
+ ]}
+];
+
+const SHOULD=[
+ ['s','How to approach machine coding interviews','machine-coding-approach','x-machine'],
+ ['s','How to write clean code','writing-clean-code','x-clean'],
+ ['s','How to choose design patterns','choosing-design-patterns','x-choose'],
+ ['s','How to handle concurrency scenarios','handling-concurrency','x-concurrency'],
+ ['s','Design Logging Framework','design-logging-framework','x-logging'],
+ ['s','Design Rate Limiter','design-rate-limiter','x-rate'],
+ ['s','Design Shopping Cart','design-shopping-cart','x-cart'],
+ ['s','Design Task Management System','design-task-management-system','x-task'],
+ ['s','Design Coffee Vending Machine','design-coffee-vending-machine','x-coffee'],
+ ['s','Iterator','iterator','x-iterator'],
+ ['s','Null object pattern','null-object','x-null'],
+ ['s','Repository pattern','repository','x-repo']
+];
+const GOOD=[
+ ['g','Law of Demeter','lod','g-lod'],
+ ['g','Prototype','prototype','g-prototype'],
+ ['g','Bridge','bridge','g-bridge'],
+ ['g','Flyweight','flyweight','g-flyweight'],
+ ['g','Visitor','visitor','g-visitor'],
+ ['g','Mediator','mediator','g-mediator'],
+ ['g','Memento','memento','g-memento'],
+ ['g','MVC pattern','mvc','g-mvc'],
+ ['g','Producer consumer pattern','producer-consumer','g-prodcons'],
+ ['g','Use case and activity diagrams','use-case-diagram','g-usecase'],
+ ['g','Design Chess Game','design-chess-game','g-chess'],
+ ['g','Design Stack Overflow','design-stack-overflow','g-so'],
+ ['g','Design Ride Hailing Service','design-uber','g-uber'],
+ ['g','Design Online Food Delivery Service','design-online-food-delivery-service','g-food'],
+ ['g','Design Pub Sub System','design-pub-sub','g-pubsub']
+];
+
+let state={done:[]};
+try{state=JSON.parse(document.getElementById('state').textContent)||state}catch(e){}
+const done=new Set(state.done||[]);
+const LS='lld-plan-2-done';
+try{const local=JSON.parse(localStorage.getItem(LS)||'[]');local.forEach(id=>done.add(id))}catch(e){}
+
+const app=document.getElementById('app');
+const fmtDay=d=>{const x=new Date(d+'T00:00:00');return{wd:x.toLocaleDateString('en-US',{weekday:'short'}),md:x.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}};
+const todayKey=(()=>{const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')})();
+const allDays=PLAN.flatMap(w=>w.days);
+const scheduled=allDays.flatMap(d=>d[1]);
+const earlierItems=EARLIER.flatMap(d=>d[1]);
+
+function itemHTML(it){
+ const [t,label,slug,id]=it;const c=done.has(id);
+ return '<li class="item'+(c?' checked':'')+'"><input type="checkbox" id="cb-'+id+'" data-id="'+id+'"'+(c?' checked':'')+'><label for="cb-'+id+'"><span class="tier t-'+t+'">'+TIER[t]+'</span><span class="txt">'+label+'</span></label>'+(slug?'<a href="'+B+slug+'" target="_blank" rel="noopener">Open page</a>':'')+'</li>';
+}
+
+function render(){
+ const dn=scheduled.filter(i=>done.has(i[3])).length;
+ const pct=Math.round(dn/scheduled.length*100);
+ const en=earlierItems.filter(i=>done.has(i[3])).length;
+ const idx=allDays.findIndex(d=>d[0]===todayKey);
+ let dayLine;
+ if(idx>=0)dayLine='Today is <strong>day '+(idx+1)+' of '+allDays.length+'</strong>';
+ else if(todayKey<allDays[0][0])dayLine='Starts on Wednesday 4 November';
+ else dayLine='The plan is over. Keep going with the extra lists below';
+ let h='<h1>LLD plan 2</h1><p class="sub">Wednesday 4 November to Monday 30 November 2026, about 2 to 3 hours a day, following the algomaster.io LLD course.</p>';
+ h+='<nav class="strip" aria-label="Days">';
+ allDays.forEach((d,i)=>{const its=d[1];const k=its.filter(x=>done.has(x[3])).length;const full=k===its.length;const p=Math.round(k/its.length*100);
+  h+='<a class="sq'+(full?' done':'')+(d[0]===todayKey?' today':'')+'" href="#d-'+d[0]+'" style="--p:'+p+'%" title="Day '+(i+1)+': '+k+' of '+its.length+' done" aria-label="Day '+(i+1)+', '+k+' of '+its.length+' done">'+(i+1)+'</a>'});
+ h+='</nav><div class="meta"><span>'+dayLine+'</span><span><strong>'+dn+' of '+scheduled.length+'</strong> tasks done ('+pct+'%) · '+en+' finished in October</span></div>';
+ h+='<p class="note">For every page: read it, then write a small program yourself before ticking it off. Sketch a quick class diagram before coding anything with more than one class. On a hard day, do at least 20 minutes, and use the buffer days if you fall behind.</p>';
+ h+='<div class="legend"><span><span class="tier t-m">Must</span> needed for interviews</span><span><span class="tier t-s">Should</span> strongly expected</span><span><span class="tier t-g">Good</span> nice extra, only if ahead</span></div>';
+ h+='<section class="week"><h2>Already done</h2><p class="theme">Finished during plan 1, 15 to 19 October.</p>';
+ EARLIER.forEach(d=>{const f=fmtDay(d[0]);
+  h+='<div class="day"><div class="when"><b>'+f.wd+' '+f.md+'</b></div><ul class="items">'+d[1].map(itemHTML).join('')+'</ul></div>'});
+ h+='</section>';
+ PLAN.forEach(w=>{
+  h+='<section class="week"><h2>'+w.title+'</h2><p class="theme">'+w.theme+'</p>';
+  w.days.forEach(d=>{const f=fmtDay(d[0]);const n=allDays.indexOf(d)+1;
+   h+='<div class="day'+(d[0]===todayKey?' is-today':'')+'" id="d-'+d[0]+'"><div class="when"><b>Day '+n+'</b>'+f.wd+' '+f.md+(d[0]===todayKey?' (today)':'')+'</div><ul class="items">'+d[1].map(itemHTML).join('')+'</ul></div>'});
+  h+='</section>';
+ });
+ const sd=SHOULD.filter(i=>done.has(i[3])).length,gd=GOOD.filter(i=>done.has(i[3])).length;
+ h+='<details><summary>More should-know topics<span>'+sd+' of '+SHOULD.length+' done</span></summary><p>Pick these up on buffer days or right after the plan ends. The interview problems are the most useful ones here.</p><ul class="items">'+SHOULD.map(itemHTML).join('')+'</ul></details>';
+ h+='<details><summary>Good to know, later<span>'+gd+' of '+GOOD.length+' done</span></summary><p>Rarely asked at early career level. Skip these until everything above is done.</p><ul class="items">'+GOOD.map(itemHTML).join('')+'</ul></details>';
+ h+='<p class="status" id="status" role="status"></p>';
+ const openD=[...app.querySelectorAll('details')].map(x=>x.open);
+ app.innerHTML=h;
+ app.querySelectorAll('details').forEach((x,i)=>{if(openD[i])x.open=true});
+ setStatus(statusText);
+}
+
+let statusText='';
+function setStatus(t){statusText=t;const s=document.getElementById('status');if(s)s.textContent=t}
+
+let pub=null,canPublish=true,timer=null;
+function buildDoc(){
+ const st=JSON.stringify({done:[...done].sort()}).replace(/</g,'\\u003c');
+ return '<!doctype html>\n<html lang="en">\n<head>\n'+HEAD+'<style id="css">'+CSS+'</style>\n</head>\n<body>\n<main id="app"></main>\n<script id="state" type="application/json">'+st+'<\/script>\n<script id="app-js">'+SRC+'<\/script>\n</body>\n</html>\n';
+}
+function save(){
+ try{localStorage.setItem(LS,JSON.stringify([...done]))}catch(e){}
+ if(!pub||!canPublish){setStatus('Progress saved in this browser only.');return}
+ clearTimeout(timer);setStatus('Saving…');
+ timer=setTimeout(async()=>{
+  try{await pub.publish(buildDoc());setStatus('Saved.')}
+  catch(e){const c=e&&e.code;
+   if(c==='conflict')return;
+   if(['not_writer','not_granted','not_declared','consent_required','capability_disabled','capability_removed'].includes(c)){canPublish=false;setStatus('Progress saved in this browser only.')}
+   else if(c==='rate_limited'){setStatus('Saving paused for a moment. Your ticks are kept in this browser.')}
+   else setStatus('Could not save online. Your ticks are kept in this browser.');
+  }
+ },2500);
+}
+
+app.addEventListener('change',e=>{
+ const cb=e.target.closest('input[type=checkbox]');if(!cb)return;
+ const id=cb.dataset.id;cb.checked?done.add(id):done.delete(id);
+ render();save();
+ const again=document.getElementById('cb-'+id);if(again)again.focus();
+});
+
+render();
+if(todayKey>=allDays[0][0]&&todayKey<=allDays[allDays.length-1][0]){const el=document.getElementById('d-'+todayKey);if(el&&location.hash==='')setTimeout(()=>el.scrollIntoView({block:'start'}),50)}
+if(window.claude&&window.claude.use){window.claude.use('artifact').then(a=>{pub=a;if(!a)setStatus('Progress saved in this browser only.')}).catch(()=>{})}
+else setStatus('Progress saved in this browser only.');
+})();
+</script>
+</body>
+</html>
