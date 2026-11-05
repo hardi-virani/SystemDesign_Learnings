@@ -56,7 +56,7 @@
 
 | Day | Date | Topic | Tier | Status | Lesson | My code |
 |:-:|:--|:--|:--|:-:|:-:|:--|
-| **1** | Wed 4 Nov | Association | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/association) | — |
+| **1** | Wed 4 Nov | Association | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/association) |[`College_System_Accociation_Prac.java`](src/main/java/Class_Relationships/College_System_Accociation_Prac.java) |
 |  |  | Aggregation | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/aggregation) | — |
 |  |  | Composition | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/composition) | — |
 |  |  | Dependency | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/dependency) | — |
@@ -211,7 +211,6 @@ Rarely asked at early career level. Skip these until everything above is done.
 |:--|:--|
 | Classes and objects | [`BankAccount_forPracOfClassAndObj.java`](src/main/java/BankAccount_forPracOfClassAndObj.java) |
 | Enums | [`CoffeeOrder_EnumPrac.java`](src/main/java/CoffeeOrder_EnumPrac.java) |
-| Association (first attempt) | [`College_System_Accociation_Prac.java`](src/main/java/Class_Relationships/College_System_Accociation_Prac.java) |
 
 ---
 
