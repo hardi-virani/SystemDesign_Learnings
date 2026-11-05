@@ -95,8 +95,6 @@ public class College_System_Accociation_Prac {
         Student star = new Student("Star");
         Student marry = new Student ("Marry");
 
-
-
         hardi.enroll(math);
         star.enroll(com);
         marry.enroll(math);
