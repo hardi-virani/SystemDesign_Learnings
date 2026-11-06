@@ -13,6 +13,8 @@
 
 **Plan 2: 3% done** · 6 topics finished earlier
 
+[📒 Mistakes log](MISTAKES.md)
+
 </div>
 
 ---
@@ -147,7 +149,7 @@
 | **24** | Fri 27 Nov | Design Splitwise | 🟡 Should | ⬜ | [📖 Read](https://algomaster.io/learn/lld/design-splitwise) | — |
 |  |  | Design Movie Booking System | 🟡 Should | ⬜ | [📖 Read](https://algomaster.io/learn/lld/design-movie-booking-system) | — |
 | **25** | Sat 28 Nov | Buffer day: catch up on anything unfinished | 🔴 Must | ⬜ | — | — |
-|  |  | Review your mistakes log | 🔴 Must | ⬜ | — | — |
+|  |  | Review your [mistakes log](MISTAKES.md) | 🔴 Must | ⬜ | [📒 Open](MISTAKES.md) | — |
 | **26** | Sun 29 Nov | Mock: Parking Lot from scratch in 45 minutes, no notes | 🔴 Must | ⬜ | — | — |
 | **27** | Mon 30 Nov | Mock: Design ATM as an unseen problem, 45 minutes | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/design-atm) | — |
 |  |  | Review your weakest two topics | 🔴 Must | ⬜ | — | — |
@@ -218,6 +220,7 @@ Rarely asked at early career level. Skip these until everything above is done.
 
 ```
 src/main/java/          # one practice program per topic, each with its own main()
+MISTAKES.md             # every bug I made, why, and the rule to avoid it
 docs/lld-plan-2.html    # interactive checklist for plan 2 (download and open in a browser)
 pom.xml                 # Maven build, Java 23
 ```
