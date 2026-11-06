@@ -37,10 +37,7 @@
 
 **What went wrong:** a class kept the *name* of a related object instead of a reference to the object itself.
 
-<table>
-<tr><th>❌ Wrong</th><th>✅ Right</th></tr>
-<tr>
-<td>
+❌ **Wrong**
 
 ```java
 class Course {
@@ -52,8 +49,7 @@ class Course {
 }
 ```
 
-</td>
-<td>
+✅ **Right**
 
 ```java
 class Course {
@@ -64,10 +60,6 @@ class Course {
     }
 }
 ```
-
-</td>
-</tr>
-</table>
 
 **Why it matters:**
 - A `String` is not a relationship. `Course` can no longer reach the professor's other data or methods.
@@ -85,10 +77,7 @@ class Course {
 
 **What went wrong:** called `remove` on a `List<Room>` with a `String`. It compiles, because `remove` takes any `Object`, but nothing is removed.
 
-<table>
-<tr><th>❌ Wrong</th><th>✅ Right</th></tr>
-<tr>
-<td>
+❌ **Wrong**
 
 ```java
 List<Room> rooms = new ArrayList<>();
@@ -98,8 +87,7 @@ List<Room> rooms = new ArrayList<>();
 rooms.remove("Powder Room");
 ```
 
-</td>
-<td>
+✅ **Right**
 
 ```java
 // match on a field
@@ -109,10 +97,6 @@ rooms.removeIf(r ->
 // or pass the same Room object
 rooms.remove(powderRoom);
 ```
-
-</td>
-</tr>
-</table>
 
 **Why it matters:**
 - `remove(Object)` compares using `equals()`. A `String` is never equal to a `Room`, so it silently does nothing.
@@ -130,10 +114,7 @@ rooms.remove(powderRoom);
 
 **What went wrong:** a `get...()` method also changed a field, so reading the value changed it.
 
-<table>
-<tr><th>❌ Wrong</th><th>✅ Right</th></tr>
-<tr>
-<td>
+❌ **Wrong**
 
 ```java
 public double getTotalArea() {
@@ -144,8 +125,7 @@ public double getTotalArea() {
 }
 ```
 
-</td>
-<td>
+✅ **Right**
 
 ```java
 public double getTotalArea() {
@@ -156,10 +136,6 @@ public double getTotalArea() {
     return total;       // same answer every call
 }
 ```
-
-</td>
-</tr>
-</table>
 
 **Why it matters:**
 - Calling the getter twice gives two different answers.
