@@ -6,12 +6,12 @@
 
 ![Java](https://img.shields.io/badge/Java-23-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
-![Plan 2](https://img.shields.io/badge/Plan_2-4%2F59_tasks-2E8B57?style=for-the-badge)
+![Plan 2](https://img.shields.io/badge/Plan_2-6%2F59_tasks-2E8B57?style=for-the-badge)
 ![Earlier](https://img.shields.io/badge/Done_in_October-6_topics-1D47B8?style=for-the-badge)
 
 **4 Nov → 30 Nov 2026** · 27 days · 2–3 hours a day · following [AlgoMaster LLD](https://algomaster.io/learn/lld)
 
-**Plan 2: 7% done** · 6 topics finished earlier
+**Plan 2: 10% done** · 6 topics finished earlier
 
 [📒 Mistakes log](MISTAKES.md)
 
@@ -24,7 +24,7 @@
 | Section | Focus | Progress | Done |
 |:--|:--|:--|:-:|
 | **Already done** | OOP foundations (October) | ![100%](https://img.shields.io/badge/100%25-done-2E8B57?style=flat-square) | 6/6 |
-| **Catch-up day** | Class relationships | ![67%](https://img.shields.io/badge/67%25-in_progress-D9951A?style=flat-square) | 4/6 |
+| **Catch-up day** | Class relationships | ![100%](https://img.shields.io/badge/100%25-done-2E8B57?style=flat-square) | 6/6 |
 | **Week 1** | Principles, SOLID & UML | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
 | **Week 2** | Design patterns | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/17 |
 | **Week 3** | Interview problems | ![0%](https://img.shields.io/badge/0%25-not_started-8FA3C2?style=flat-square) | 0/10 |
@@ -62,8 +62,8 @@
 |  |  | Aggregation | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/aggregation) | [`Team_Player_AgreegationPrac.java`](src/main/java/Class_Relationships/Team_Player_AgreegationPrac.java) |
 |  |  | Composition | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/composition) | [`HomeSystem_CompositionPrac.java`](src/main/java/Class_Relationships/HomeSystem_CompositionPrac.java) |
 |  |  | Dependency | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/dependency) | [`BillingService_DependencyPrac.java`](src/main/java/Class_Relationships/BillingService_DependencyPrac.java) |
-|  |  | Realization | 🟡 Should | ⬜ | [📖 Read](https://algomaster.io/learn/lld/realization) | — |
-|  |  | Quiz + exercise: class relationships | 🔴 Must | ⬜ | [📖 Read](https://algomaster.io/learn/lld/class-relationships-exercises) | — |
+|  |  | Realization | 🟡 Should | ✅ | [📖 Read](https://algomaster.io/learn/lld/realization) | [`PhoneSystem_RealizationPrac.java`](src/main/java/Class_Relationships/PhoneSystem_RealizationPrac.java) |
+|  |  | Quiz + exercise: class relationships | 🔴 Must | ✅ | [📖 Read](https://algomaster.io/learn/lld/class-relationships-exercises) | — |
 
 ---
 
