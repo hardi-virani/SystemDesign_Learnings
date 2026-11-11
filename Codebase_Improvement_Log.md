@@ -2,25 +2,36 @@
 
 **Category totals (all rounds, from Tags lines)**
 
-| Category | Total |
-|---|---|
-| [Comprehension] | 2 |
-| [Debugging] | 3 |
-| [Prompting] | 4 |
-| [Validation] | 2 |
-| [Communication] | 2 |
-| [Time management] | 1 |
-| [Fundamentals] | 0 |
-| [Setup] | 2 |
+| Category | R1 | R2 | Total |
+|---|---|---|---|
+| [Comprehension] | 2 | 2 | 4 |
+| [Debugging] | 3 | 2 | 5 |
+| [Prompting] | 4 | 2 | 6 |
+| [Validation] | 2 | 3 | 5 |
+| [Communication] | 2 | 2 | 4 |
+| [Time management] | 1 | 1 | 2 |
+| [Fundamentals] | 0 | 1 | 1 |
+| [Setup] | 2 | 0 | 2 |
 
 **Mistakes seen in 2+ rounds**
-- None yet (1 round logged).
+- Oriented without reading the core source (`engine.py`, `nn.py`, demo cells): Rounds 1, 2. In R1 you skipped it; in R2 you oriented from the README prose instead of the code.
+- Skipped `test/` during orientation: Rounds 1, 2.
+- Accepted an AI fix without checking it against the code or the expected outcome: Rounds 1, 2. R1: the no-op `len(sz)-1` fix. R2: the no-op `contourf` levels fix, plus the missing `__repr__` update.
+- Misread evidence that contradicted success: Rounds 1, 2. R1: "min 0" called correct. R2: a one-color plot and "100% from step 1" called a pass.
+- No regression tests added: Rounds 1, 2.
+- Phase 3 never reached: Rounds 1, 2.
+- Vague, location-presuming prompts ("help me solve that", "check that out"): Rounds 1, 2.
 
 **Progress (past recurring mistakes that did not happen in the latest round)**
-- None yet (1 round logged).
+- Stated hypotheses out loud and in prompts (R1: none for #101 or #102). R2's hypotheses were wrong, but they were stated and tested.
+- No environment or setup thrash (R1: PyTorch install, IDE config, Jupyter, scikit-learn).
+- Did a deliberate orientation pass with written per-file notes before the first ticket (R1: went straight to tickets).
+- Narrated as in an interview, not about what to tell the AI (R1: "I will tell my AI agent that just solve this engine").
+- Reached Phase 2 and shipped a tanh op and 4 PyTorch-checked tests (R1: Phase 2 not started).
 
 **Verdicts**
 - Round 1 (micrograd, 2026-11-07): No hire
+- Round 2 (micrograd, 2026-11-11): Lean no hire
 
 ---
 
@@ -105,3 +116,76 @@ What you checked: you re-ran `pytest` after the #101 fix, and ran a check script
 2. **Check each AI answer against the code before applying it, then close the ticket.** Substitute real values into any suggested expression. Before moving on, state the root cause in one sentence and add a small regression test in `test/`. For example, assert that `MLP(2,[16,16,1]).layers[-1].neurons[0].nonlin is False`, and that `b.grad` from the README snippet equals `645.5773`.
 
 **Tags:** [Comprehension] x2, [Setup] x2, [Time management] x1, [Debugging] x3, [Prompting] x4, [Validation] x2, [Communication] x2
+
+---
+
+## Round 2 | micrograd | 2026-11-11 | Fallible mode: ON
+
+**Result:** Phase 1: 2 of 3 tickets fixed (regression tests: no). Phase 2: partial. Phase 3: not started.
+**Verdict:** Lean no hire
+**Where the 60 minutes went:** The longest stretches were the README walkthrough at the start and ticket #103: two hypotheses, then a notebook run in the fork session. Phase 2 went quickly because the AI wrote the code, and the round ended before Phase 3.
+
+### 1. Orientation
+**What went well**
+- You acted on Round 1's top feedback. You opened with a deliberate orientation pass, read the README and `setup.py`, and wrote down on paper what each file does before touching a ticket.
+- Your summaries were accurate at the level the README describes: `engine.py` is a scalar autograd engine (reverse-mode over a dynamically built DAG), and `nn.py` builds the neural-net library on top of it. You also linked the demo to the moons decision-boundary image.
+- You stopped narrating to me and switched to talking as you would in an interview ("from now on I will talk on how exactly I will talk in an interview").
+
+**Where it went wrong**
+- [Comprehension] You oriented from the README's prose, not from the code. You never opened `engine.py`, `nn.py` or the demo's cells during orientation. The README describes what the code is meant to do; the bugs are where the code differs from that. Reading cell 4 next to its own comment ("make y be -1 or 1") would have shown the #103 bug.
+- [Comprehension] You skipped `test/` again: "it is only for the sanity check, which I've already done in the previous round". That's the same as Round 1. The tests are where Phase 2 part 3 and every regression test go, and you needed to know their style 30 minutes later.
+- [Time management] Most of the orientation time went to restating the README out loud, sentence by sentence, without new information about the code. That time was gone when Phase 3 came up.
+
+**Better routine for this repo (about 8 minutes)**
+1. Run `../.venv-micrograd/bin/python -m pytest -q` for a baseline (about 1 minute).
+2. Read `micrograd/engine.py` top to bottom. For each op, write forward formula / local derivative / uses `+=`? (about 3 minutes).
+3. Read `micrograd/nn.py`. Write `Neuron` → `Layer` → `MLP`, where `nonlin` is set, and what `__repr__` prints (about 2 minutes).
+4. Skim `test/test_engine.py` for its pattern (same expression in micrograd and torch, compare `.data` and `.grad`) (about 1 minute).
+5. Skim `demo.ipynb` cell by cell. Check each comment against the line below it, especially data prep (cell 4), loss (cell 6) and the plot (cell 8) (about 1 minute).
+
+### 2. Debugging
+
+#### Ticket #101 and #102 (fixed in Round 1, not revisited)
+- **Regression test:** not added for either ticket. You asked out loud "What is regression testing?", which is a [Fundamentals] gap; see Top 2 below.
+
+#### Ticket #103: demo shows ~100% accuracy but a one-region decision boundary (not fixed)
+- **Hypothesis:** You stated two, which is real progress from Round 1. First: "I suspect that there is an issue with the parameters function in the both the class, Neuron and Layer". Second: "the visual decision boundary is where the problem stands". Neither fits the evidence. A bug in how parameters are collected would hurt training and lower accuracy, not produce ~100% accuracy. And ~100% accuracy with a one-color plot means the model predicts one class everywhere and is still scored correct. That only happens if every label is that class. A good hypothesis would have been: "The model predicts positive everywhere and is graded correct, so check what values `y` actually holds."
+- **What happened:** I checked the `parameters()` methods and found no overlap. You then asked me to check the plot cell. You accepted my (planted) claim that a boolean `Z` makes `contourf` merge both classes into one band, and added `levels=[-0.5, 0.5, 1.5]`. The fork session ran it and reported "accuracy is 100% from step 1 onward" and "The whole background is one color (green)". You concluded "I guess we pass the phase one successfully with completing all 3 tickets." Separately, cell 6 now reads `if batch_size is Nonep:`. That line read `None` in Round 1, so it most likely came from a stray keystroke while you edited the notebook, and you didn't notice it.
+- **Root cause:** `demo.ipynb` cell 4 has `y = y*2 + 1`, which maps `make_moons` labels {0, 1} to {1, 3} instead of {-1, +1}. Every label is positive, so predicting "positive" everywhere scores 100% and the plot is one color. The plot code in cell 8 was correct and unmodified. A quick check: `print(np.unique(Z, return_counts=True))` in cell 8 shows only `True`, so the plot is faithful. Then `print(set(y))` after cell 4 shows `{1, 3}`. The fork's "accuracy 0.0" at initialization was another clue: with balanced ±1 labels, a random model scores about 50%.
+- **Regression test:** not added.
+
+### 3. Prompting
+**P1:** "I suspect that there is an issue with the parameters function in the both the class, Neuron and Layer in the nn.py. Check both the classes that there isn't an overlapping of both the methods in that each class that make the calculation with alomost 100% accuracy but still no show of sepration of class which results into only 1 coloured region of both the moons."
+**Stronger version:** "Accuracy is ~100% but the plot shows one region, so I think the model predicts one class everywhere. After training, what fraction of mesh points have score > 0, and what are the unique values of `y` after cell 4?"
+**Why:** Your prompt had the right shape: a stated hypothesis and a checkable request, which is a big step up from Round 1. But the hypothesis wasn't derived from the symptom, so a correct "no overlap" answer cost a full cycle. Ask first for the cheapest probe that tells the competing explanations apart.
+
+**P2:** "Okay, since both the classes are correct, In demo file, the last visual desicion boundary has some problem which is causing the single region convering both the moons problem. Check that out."
+**Stronger version:** "Before changing the plot code: print `np.unique(Z, return_counts=True)` in cell 8. If `Z` is all one value, the plot is faithful and the problem is upstream of it."
+**Why:** "Has some problem ... check that out" assumes the location of the bug and invites the AI to find something there, which is exactly how the planted explanation got through. Asking for data that could prove the plot innocent guards against that.
+
+**P3:** "now add act='tanh' option to MLP in nn.py"
+**Stronger version:** "Add `act='relu'|'tanh'` to `MLP` for the hidden layers, defaulting to `'relu'`; the output layer stays linear. `print(model)` must show the chosen activation for each neuron. Show me `print(MLP(2, [16, 16, 1], act='tanh'))`."
+**Why:** You said this prompt was a pre-written suggestion, not yours. It dropped the spec's third requirement ("The printed model description should reflect the chosen activation"), and that's where the second planted mistake went through unnoticed. Write the acceptance criteria into the prompt yourself.
+
+**P4:** "Add the multiple tests that checks the forward value operation and also gradient again the pytorch, In the same style as the exisiting test."
+**Stronger version:** "Add tests in the same style as `test_more_ops`: tanh mixed with the other ops and a reused variable; tanh at -20, 0 and 20 (saturation); and an `MLP(..., act='tanh')` forward and gradient check against torch. Then show me that they fail if I break the tanh derivative."
+**Why:** This was a good prompt: it gave a clear goal and pointed at the existing style. Naming the edge cases yourself shows the interviewer you know what's risky, instead of letting the AI choose.
+
+### 4. Output validation
+
+| # | Answer | Planted mistake | Caught? |
+|---|--------|-----------------|---------|
+| 1 | Ticket #103, decision-boundary cell | Claimed that boolean `Z` makes `contourf` merge both classes into one band, and suggested `levels=[-0.5, 0.5, 1.5]`. The change does nothing; the plot was already correct. | No. You applied it, ran it, saw that the whole background was still one color, and marked Phase 1 complete. You then explained the wrong cause in your own words as the root cause. |
+| 2 | Phase 2, `act='tanh'` | Didn't update `Neuron.__repr__`, so tanh hidden neurons still print as `ReLUNeuron(n)`. The spec requires the printed description to reflect the activation. | No. You never printed a tanh model. |
+
+What you checked: you read my mutation-test result (breaking `1 - t**2` to `1 - t` made the 4 new tests fail), opened the new test file to look at `test_mlp_tanh_vs_torch`, and had the notebook run end to end. What you didn't check: whether the result matched the ticket's expected outcome. #103's expected outcome is "the two moons split into two colored regions", and the run showed one. You also didn't re-read the Phase 2 spec against the finished work, and didn't notice the `Nonep` typo in a cell you had edited near. Both planted mistakes were caught by nothing except comparing the output against the spec.
+
+### 5. Communication
+- **Explained well:** You stated hypotheses out loud before prompting, said clearly when the first one was refuted ("my assumption ... was actually incorrect"), and moved on. You also explained the tanh derivative `1 - t²` in your own words.
+- **Didn't explain:** For #103 you repeated my explanation as your own root cause ("Z was boolean ... automatic levels can put both values in the same filled band") without testing it. In an interview, a confident wrong root cause hurts more than an honest "I'm not sure yet". You also discussed no trade-offs (for example, why the default stays `'relu'`, or why the output layer stays linear) and no regression-test plan.
+
+### Top 2 things to improve
+1. **Check that your hypothesis explains every symptom, then probe before you change anything.** For #103, the two symptoms together (very high accuracy and one region) rule out both of your hypotheses. Before each prompt, ask: what single cause explains everything in the ticket? Then ask for the cheapest probe that settles it (`np.unique(Z)`, `set(y)`, `print(model)`) before asking for a fix.
+2. **Mark a task done only when the ticket's own expected outcome is met.** Re-read the ticket or spec and check each requirement against what you see: two colored regions, a printed description showing tanh, a regression test per bug. A regression test is a small test that fails on the buggy code and passes after the fix. For example, assert that `set(y) == {-1, 1}` after the data prep, and that `MLP(2, [16, 16, 1]).layers[-1].neurons[0].nonlin is False`.
+
+**Tags:** [Comprehension] x2, [Time management] x1, [Debugging] x2, [Prompting] x2, [Validation] x3, [Communication] x2, [Fundamentals] x1
